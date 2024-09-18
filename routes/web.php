@@ -9,7 +9,6 @@ return [
     'fonts/delete' => ['controller' => 'FontController', 'action' => 'delete'],
     'get-fonts' => ['controller' => 'FontController', 'action' => 'getAllFonts'],
 
-
     'font-groups/create' => ['controller' => 'FontGroupController', 'action' => 'create'],
     'font-groups/list' => ['controller' => 'FontGroupController', 'action' => 'list'],
     'font-groups/edit' => ['controller' => 'FontGroupController', 'action' => 'edit'],

@@ -7,6 +7,6 @@ class DashboardController
 {
     public function index(): void
     {
-        include '../app/views/layouts/layout.php';
+        include(__DIR__ . '/../views/layouts/layout.php');
     }
 }

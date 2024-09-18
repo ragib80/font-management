@@ -44,7 +44,15 @@
 ## Step 6: Test the Project
 
 1. Start your web server (e.g., WAMP, XAMPP).
-2. Open a web browser and navigate to the root path.
+2. Open a web browser and navigate to the following URLs:
+
+   - [http://localhost/dashboard](http://localhost/dashboard) - To view the Dashboard page.
+   - [http://localhost/fonts/upload](http://localhost/fonts/upload) - To upload Font.
+   - [http://localhost/fonts/list](http://localhost/fonts/list) - To view the Fonts list page.
+   - [http://localhost/font-groups/create](http://localhost/font-groups/create) - To view the create Font Group page.
+   - [http://localhost/font-groups/list](http://localhost/font-groups/list) - To view the Font Group list page.
+
+3. For live testing, browse [http://font-group.rf.gd/](http://font-group.rf.gd/).
 
 ---
 

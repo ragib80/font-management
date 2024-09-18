@@ -1,8 +1,8 @@
 <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark"> <!--begin::Sidebar Brand-->
     <div class="sidebar-brand"> <!--begin::Brand Link-->
-        <a href="javascript:void(0)" data-url-link="/dashboard" class="brand-link"> <!--begin::Brand Image-->
-            <img src="https://content.easy.jobs/assets/82042/company_logo.png" alt="AdminLTE Logo" class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text-->
-            <span class="brand-text fw-light">Home Task</span> <!--end::Brand Text-->
+        <a href="javascript:void(0)" data-url-link="<?php echo BASE_URL; ?>/dashboard" class="brand-link"> <!--begin::Brand Image-->
+            <img src="https://zeptoapps.com/cdn/shop/files/Zepto-logo.png?v=1659417999&width=120" alt="AdminLTE Logo" class="brand-image opacity-75 shadow"> <!--end::Brand Image--> <!--begin::Brand Text-->
+            <!-- <span class="brand-text fw-light">Font Management</span>  -->
         </a> <!--end::Brand Link-->
     </div> <!--end::Sidebar Brand--> <!--begin::Sidebar Wrapper-->
     <div class="sidebar-wrapper">

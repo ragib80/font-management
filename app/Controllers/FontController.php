@@ -4,55 +4,72 @@ namespace App\Controllers;
 
 use App\Models\Font;
 use App\Requests\FontRequest;
+use App\Controllers\BaseController;
 
-class FontController
+class FontController extends BaseController
 {
     public function upload(): void
     {
         $fontRequest = new FontRequest();
 
-        if ($fontRequest->validateUpload($_FILES['font'])) {
-            $font = new Font();
-            if ($font->upload($_FILES['font'])) {
-                echo json_encode(['code' => 200, 'status' => 'success', 'message' => 'Font uploaded successfully']);
+        if ($this->isAjax()) {
+            if ($fontRequest->validateUpload($_FILES['font'])) {
+                $font = new Font();
+                if ($font->upload($_FILES['font'])) {
+                    $this->jsonResponse(['code' => 200, 'status' => 'success', 'message' => 'Font uploaded successfully']);
+                } else {
+                    $this->jsonResponse(['code' => 500, 'status' => 'error', 'message' => 'Font upload failed']);
+                }
             } else {
-                echo json_encode(['code' => 500, 'status' => 'error', 'message' => 'Font upload failed']);
+                $this->jsonResponse(['code' => 415, 'status' => 'error', 'message' => 'Invalid file. Only TTF files are allowed.']);
             }
         } else {
-            echo json_encode(value: ['code' => 415, 'status' => 'error', 'message' => 'Invalid file. Only TTF files are allowed.']);
+            include(__DIR__ . '/../views/layouts/layout.php');
         }
     }
 
     public function list(): void
     {
-        header('Content-Type: application/json');
         $font = new Font();
         $fonts = $font->getAllFonts();
-        echo json_encode(['status' => 'success', 'data' => $fonts]);
-    }
 
+        if ($this->isAjax()) {
+            $this->jsonResponse(['code' => 200, 'status' => 'success', 'data' => $fonts]);
+        } else {
+            include(__DIR__ . '/../views/layouts/layout.php');
+        }
+    }
 
     public function delete(): void
     {
-        header('Content-Type: application/json');
-        $fontRequest = new FontRequest();
-        $id = $_POST['id'] ?? null;
-        if ($fontRequest->validateDelete($id)) {
-            $font = new Font();
-            if ($font->delete((int)$id)) {
-                echo json_encode(['status' => 'success', 'message' => 'Font deleted successfully']);
+        if ($this->isAjax()) {
+            $fontRequest = new FontRequest();
+            $id = $_POST['id'] ?? null;
+
+            if ($fontRequest->validateDelete($id)) {
+                $font = new Font();
+                if ($font->delete((int) $id)) {
+                    $this->jsonResponse(['code' => 200, 'status' => 'success', 'message' => 'Font deleted successfully']);
+                } else {
+                    $this->jsonResponse(['code' => 500, 'status' => 'error', 'message' => 'Font deletion failed']);
+                }
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Font deletion failed']);
+                $this->jsonResponse(['code' => 400, 'status' => 'error', 'message' => 'Invalid request']);
             }
         } else {
-            echo json_encode(['status' => 'error', 'message' => 'Invalid request']);
+            include(__DIR__ . '/../views/invalid_request_page.php');
         }
     }
+
     public function getAllFonts(): void
     {
-        header('Content-Type: application/json');
         $font = new Font();
         $fonts = $font->getAllFontsAjax();
-        echo json_encode(['status' => 'success', 'data' => $fonts]);
+
+        if ($this->isAjax()) {
+            $this->jsonResponse(['code' => 200, 'status' => 'success', 'data' => $fonts]);
+        } else {
+            include(__DIR__ . '/../views/invalid_request_page.php');
+        }
     }
 }
